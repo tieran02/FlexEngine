@@ -1,6 +1,3 @@
-[submodule "FlexRenderer/vendor/glfw"]
-	path = FlexRenderer/vendor/glfw
-	url = https://github.com/gabrielevierti/glfw-premake
 [submodule "FlexRenderer/vendor/spdlog"]
 	path = FlexRenderer/vendor/spdlog
 	url = https://github.com/gabime/spdlog
