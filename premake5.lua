@@ -25,6 +25,7 @@ project "FlexRenderer"
 
 	includedirs
 	{
+		"vendor/spdlog/include",
 		"%{prj.name}/include/Flex"
 	}
 
@@ -69,6 +70,7 @@ project "Sandbox"
 
 	includedirs
 	{
+		"vendor/spdlog/include",
 		"FlexRenderer/include/",
 		"%{prj.name}/include/"
 	}

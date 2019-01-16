@@ -34,3 +34,8 @@
 *.user
 
 *.sln
+
+\.vs/
+
+\bin/
+\bin-int/

@@ -9,6 +9,6 @@ public:
 
 Flex::Application* Flex::CreateApplication()
 {
+	FL_LOG_INFO("Client initilised");
 	return new Sandbox();
-
 }
