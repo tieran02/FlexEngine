@@ -1,5 +1,5 @@
-#include "Event.h"
-#include "EventHandler.h"
+#include "Events/Event.h"
+#include "Events/EventHandler.h"
 
 namespace  Flex {
 	void Event::AddHandler(const EventHandler& handler)

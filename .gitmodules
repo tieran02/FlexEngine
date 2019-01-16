@@ -4,3 +4,6 @@
 [submodule "FlexRenderer/vendor/spdlog"]
 	path = FlexRenderer/vendor/spdlog
 	url = https://github.com/gabime/spdlog
+[submodule "FlexRenderer/vendor/glm"]
+	path = FlexRenderer/vendor/glm
+	url = https://github.com/g-truc/glm

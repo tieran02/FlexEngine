@@ -1,4 +1,4 @@
-#include "EventHandler.h"
+#include "Events/EventHandler.h"
 #include "Log.h"
 
 namespace Flex
@@ -15,7 +15,7 @@ namespace Flex
 		m_func();
 	}
 
-	void EventHandler::operator=(const EventHandler& func)
+	EventHandler& EventHandler::operator=(const EventHandler& func)
 	{
 		if (m_func == nullptr) {
 			m_func = func;
@@ -25,6 +25,7 @@ namespace Flex
 		{
 			FL_LOG_ERROR("Tried assigning an existing EventHandler to a new EventHandler");
 		}
+		return *this;
 	}
 
 	bool EventHandler::operator==(const EventHandler& del)

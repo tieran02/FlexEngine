@@ -9,6 +9,13 @@ workspace "Flex"
 
 outputdir = "%{cfg.buildcfg}-%{cfg.system}-%{cfg.architecture}"
 
+-- Include directories relative to root folder (solution directory)
+IncludeDir = {}
+IncludeDir["GLFW"] = "FlexRenderer/vendor/GLFW/include"
+
+
+include "FlexRenderer/vendor/GLFW"
+
 project "FlexRenderer"
 	location "FlexRenderer"
 	kind "SharedLib"
@@ -16,6 +23,7 @@ project "FlexRenderer"
 
 	targetdir ("bin/" .. outputdir .. "/%{prj.name}")
 	objdir ("bin-int/" .. outputdir .. "/%{prj.name}")
+	buildoptions "/MT"
 
 	files
 	{
@@ -25,8 +33,14 @@ project "FlexRenderer"
 
 	includedirs
 	{
-		"vendor/spdlog/include",
-		"%{prj.name}/include/Flex"
+		"%{prj.name}/include/Flex",
+		"%{prj.name}/vendor/spdlog/include",
+		"%{IncludeDir.GLFW}"
+	}
+
+	links
+	{
+		"GLFW"
 	}
 
 	filter "system:windows"
@@ -61,6 +75,7 @@ project "Sandbox"
 
 	targetdir ("bin/" .. outputdir .. "/%{prj.name}")
 	objdir ("bin-int/" .. outputdir .. "/%{prj.name}")
+	buildoptions "/MT"
 
 	files
 	{
@@ -70,8 +85,9 @@ project "Sandbox"
 
 	includedirs
 	{
-		"vendor/spdlog/include",
+		"FlexRenderer/vendor/spdlog/include",
 		"FlexRenderer/include/",
+		"FlexRenderer/include/Flex",
 		"%{prj.name}/include/"
 	}
 
