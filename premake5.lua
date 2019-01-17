@@ -60,7 +60,11 @@ project "FlexRenderer"
 		}
 
 	filter "configurations:Debug"
-		defines "FL_DEBUG"
+		defines
+		{
+			"FL_DEBUG",
+			"FL_ENABLE_ASSERTS"
+		}
 		symbols "On"
 
 	filter "configurations:Release"
@@ -107,7 +111,11 @@ project "Sandbox"
 		}
 
 	filter "configurations:Debug"
-		defines "FL_DEBUG"
+		defines
+		{
+			"FL_DEBUG",
+			"FL_ENABLE_ASSERTS"
+		}
 		symbols "On"
 
 	filter "configurations:Release"

@@ -1,13 +1,17 @@
 #pragma once
 #include "Core.h"
+#include <memory>
 
 namespace Flex {
-	class FLEX_API Application
+	class Window;
+	class Application
 	{
 	public:
-		Application();
-		virtual ~Application();
-		void Run();
+		FLEX_API Application();
+		FLEX_API virtual ~Application();
+		FLEX_API void Run();
+	private:
+		std::unique_ptr<Window> m_window;
 	};
 
 	//TO be defined in a client

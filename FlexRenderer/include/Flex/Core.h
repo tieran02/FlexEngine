@@ -9,3 +9,12 @@
 #else
 	#error Flex only supports Windows!
 #endif
+
+
+#ifdef FL_ENABLE_ASSERTS
+	#define FL_ASSERT(x, ...) { if(!(x)) { FL_LOG_ERROR("Assertion Failed: {0}", __VA_ARGS__); __debugbreak(); } }
+	#define FL_CORE_ASSERT(x, ...) { if(!(x)) { FL_LOG_CORE_ERROR("Assertion Failed: {0}", __VA_ARGS__); __debugbreak(); } }
+#else
+	#define FL_ASSERT(x, ...)
+	#define FL_CORE_ASSERT(x, ...)
+#endif
