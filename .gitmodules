@@ -1,9 +1,9 @@
-[submodule "FlexRenderer/vendor/spdlog"]
-	path = FlexRenderer/vendor/spdlog
+[submodule "FlexEngine/vendor/spdlog"]
+	path = FlexEngine/vendor/spdlog
 	url = https://github.com/gabime/spdlog
-[submodule "FlexRenderer/vendor/glm"]
-	path = FlexRenderer/vendor/glm
+[submodule "FlexEngine/vendor/glm"]
+	path = FlexEngine/vendor/glm
 	url = https://github.com/g-truc/glm
-[submodule "FlexRenderer/vendor/glfw"]
-	path = FlexRenderer/vendor/glfw
+[submodule "FlexEngine/vendor/glfw"]
+	path = FlexEngine/vendor/glfw
 	url = https://github.com/TheCherno/GLFW

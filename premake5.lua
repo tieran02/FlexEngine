@@ -11,13 +11,13 @@ outputdir = "%{cfg.buildcfg}-%{cfg.system}-%{cfg.architecture}"
 
 -- Include directories relative to root folder (solution directory)
 IncludeDir = {}
-IncludeDir["GLFW"] = "FlexRenderer/vendor/GLFW/include"
+IncludeDir["GLFW"] = "FlexEngine/vendor/GLFW/include"
 
 
-include "FlexRenderer/vendor/GLFW"
+include "FlexEngine/vendor/GLFW"
 
-project "FlexRenderer"
-	location "FlexRenderer"
+project "FlexEngine"
+	location "FlexEngine"
 	kind "SharedLib"
 	language "C++"
 
@@ -89,15 +89,15 @@ project "Sandbox"
 
 	includedirs
 	{
-		"FlexRenderer/vendor/spdlog/include",
-		"FlexRenderer/include/",
-		"FlexRenderer/include/Flex",
+		"FlexEngine/vendor/spdlog/include",
+		"FlexEngine/include/",
+		"FlexEngine/include/Flex",
 		"%{prj.name}/include/"
 	}
 
 	links
 	{
-		"FlexRenderer"
+		"FlexEngine"
 	}
 
 	filter "system:windows"
