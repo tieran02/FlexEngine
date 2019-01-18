@@ -36,8 +36,7 @@ namespace Flex
 		{
 			return GetCategoryFlags() & category;
 		}
-	protected:
-		bool m_handled{ false };
+		bool Handled{ false };
 	};
 
 	class EventDispatcher
@@ -52,7 +51,7 @@ namespace Flex
 		{
 			if(m_event.GetEventType() == T::GetStaticType())
 			{
-				m_event.m_handled = func(*(T*)&m_event);
+				m_event.Handled = func(*(T*)&m_event);
 				return true;
 			}
 			return false;
