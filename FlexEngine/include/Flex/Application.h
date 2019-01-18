@@ -1,9 +1,9 @@
 #pragma once
 #include "Core.h"
-#include <memory>
+#include "Window.h"
+#include "Events/Event.h"
 
 namespace Flex {
-	class Window;
 	class Application
 	{
 	public:

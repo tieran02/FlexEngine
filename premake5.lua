@@ -11,10 +11,12 @@ outputdir = "%{cfg.buildcfg}-%{cfg.system}-%{cfg.architecture}"
 
 -- Include directories relative to root folder (solution directory)
 IncludeDir = {}
-IncludeDir["GLFW"] = "FlexEngine/vendor/GLFW/include"
+IncludeDir["GLFW"] = "FlexEngine/vendor/glfw/include"
+
+VULKAN = "F:/VulkanSDK/1.1.82.1"
 
 
-include "FlexEngine/vendor/GLFW"
+include "FlexEngine/vendor/glfw"
 
 project "FlexEngine"
 	location "FlexEngine"
@@ -23,7 +25,9 @@ project "FlexEngine"
 
 	targetdir ("bin/" .. outputdir .. "/%{prj.name}")
 	objdir ("bin-int/" .. outputdir .. "/%{prj.name}")
-	buildoptions "/MT"
+
+	pchheader "flpch.h"
+	pchsource "FlexEngine/src/flpch.cpp"
 
 	files
 	{
@@ -33,13 +37,15 @@ project "FlexEngine"
 
 	includedirs
 	{
-		"%{prj.name}/include/Flex",
+		"%{prj.name}/include",
 		"%{prj.name}/vendor/spdlog/include",
+		"".. VULKAN .."/Include",
 		"%{IncludeDir.GLFW}"
 	}
 
 	links
 	{
+		"".. VULKAN .."/Lib/vulkan-1.lib",
 		"GLFW"
 	}
 
@@ -51,7 +57,9 @@ project "FlexEngine"
 		defines
 		{
 			"FL_PLATFROM_WINDOWS",
-			"FL_BUILD_DLL"
+			"FL_BUILD_DLL",
+			"GLFW_INCLUDE_NONE",
+			"GLFW_INCLUDE_VULKAN"
 		}
 
 		postbuildcommands
@@ -65,10 +73,12 @@ project "FlexEngine"
 			"FL_DEBUG",
 			"FL_ENABLE_ASSERTS"
 		}
+		buildoptions "/MDd"
 		symbols "On"
 
 	filter "configurations:Release"
 		defines "FL_RELEASE"
+		buildoptions "/MD"
 		optimize "On"
 
 
@@ -79,7 +89,6 @@ project "Sandbox"
 
 	targetdir ("bin/" .. outputdir .. "/%{prj.name}")
 	objdir ("bin-int/" .. outputdir .. "/%{prj.name}")
-	buildoptions "/MT"
 
 	files
 	{
@@ -91,8 +100,6 @@ project "Sandbox"
 	{
 		"FlexEngine/vendor/spdlog/include",
 		"FlexEngine/include/",
-		"FlexEngine/include/Flex",
-		"%{prj.name}/include/"
 	}
 
 	links
@@ -116,8 +123,10 @@ project "Sandbox"
 			"FL_DEBUG",
 			"FL_ENABLE_ASSERTS"
 		}
+		buildoptions "/MDd"
 		symbols "On"
 
 	filter "configurations:Release"
 		defines "FL_RELEASE"
+		buildoptions "/MD"
 		optimize "On"

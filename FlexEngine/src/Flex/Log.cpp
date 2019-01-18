@@ -1,4 +1,5 @@
-#include "Log.h"
+#include "flpch.h"
+#include "Flex/Log.h"
 
 namespace  Flex {
 	std::shared_ptr<spdlog::logger> Log::s_CoreLogger;

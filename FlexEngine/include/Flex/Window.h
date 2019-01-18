@@ -1,8 +1,7 @@
 #pragma once
+#include "flpch.h"
 #include "Core.h"
-#define GLFW_INCLUDE_NONE
-#include "GLFW/glfw3.h"
-#include <string>
+#include "Events/Event.h"
 
 namespace Flex {
 
@@ -13,29 +12,30 @@ namespace Flex {
 		unsigned int Height;
 		bool VSync;
 
-		FLEX_API WindowProperites(const std::string& title = "Flex Engine", unsigned int width = 1280, unsigned int height = 720)
+		WindowProperites(const std::string& title = "Flex Engine", unsigned int width = 1280, unsigned int height = 720)
 			: Title(title), Width(width), Height(height), VSync(false){}
 
 	};
 
-	class Window
+	class FLEX_API Window
 	{
 	public:
-		FLEX_API Window(const WindowProperites& properites);
-		FLEX_API ~Window();
 
-		FLEX_API static Window* Create(const WindowProperites& properites = WindowProperites());
+		using EventCallbackFn = std::function<void(Event&)>;
+		virtual ~Window() {}
 
-		FLEX_API void Update();
+		virtual void OnUpdate() = 0;
 
-		FLEX_API bool ShouldClose();
-	private:
-		GLFWwindow* m_glfwWindow;
-		static bool m_glfwInit;
+		virtual unsigned int GetWidth() const = 0;
+		virtual unsigned int GetHeight() const = 0;
 
-		void init();
+		// Window attributes
+		virtual void SetEventCallback(const EventCallbackFn& callback) = 0;
+		virtual void SetVSync(bool enabled) = 0;
+		virtual bool IsVSync() const = 0;
 
-		WindowProperites m_data;
+		static Window* Create(const WindowProperites& properites = WindowProperites());
+
 	};
 
 }

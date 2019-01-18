@@ -1,7 +1,6 @@
 #pragma once
-#include "Core.h"
-#include <string>
-#include <functional>
+#include "flpch.h"
+#include "Flex/Core.h"
 
 namespace Flex
 {

@@ -1,6 +1,9 @@
-#include "Application.h"
+#include "flpch.h"
+#include "Flex/Application.h"
 #include <memory>
-#include "Window.h"
+#include "Flex/Window.h"
+#include "Flex/Events/ApplicationEvent.h"
+#include "Flex/Log.h"
 
 namespace Flex {
 
@@ -16,9 +19,9 @@ namespace Flex {
 
 	void Application::Run()
 	{
-		while (!m_window->ShouldClose())
+		while (true)
 		{
-			m_window->Update();
+			m_window->OnUpdate();
 		}
 	}
 } 
