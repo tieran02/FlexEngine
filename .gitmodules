@@ -6,4 +6,4 @@
 	url = https://github.com/g-truc/glm
 [submodule "FlexEngine/vendor/glfw"]
 	path = FlexEngine/vendor/glfw
-	url = https://github.com/TheCherno/GLFW
+	url = https://github.com/glfw/glfw

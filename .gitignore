@@ -40,3 +40,9 @@
 \bin/
 \bin-int/
 FlexEngine/vendor/
+
+.idea/
+
+cmake-build-debug/
+
+cmake-build-release/

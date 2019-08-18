@@ -4,11 +4,11 @@
 
 namespace Flex 
 {
-	class WindowsWindow : public Window
+	class MultiPlatformWindow : public Window
 	{
 	public:
-		WindowsWindow(const WindowProperites& props);
-		~WindowsWindow() override;
+		MultiPlatformWindow(const WindowProperites& props);
+		~MultiPlatformWindow() override;
 
 		void OnUpdate() override;
 

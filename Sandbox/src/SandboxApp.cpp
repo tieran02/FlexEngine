@@ -7,7 +7,7 @@ public:
 
 	void OnUpdate() override
 	{
-		FL_LOG_INFO("ExampleLayer::Update");
+
 	}
 
 	void OnEvent(Flex::Event& event) override

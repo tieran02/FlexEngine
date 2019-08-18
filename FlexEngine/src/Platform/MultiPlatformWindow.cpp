@@ -1,5 +1,5 @@
 #include "flpch.h"
-#include "Platform/WindowsWindow.h"
+#include "Platform/MultiPlatformWindow.h"
 #include "Flex/Events/ApplicationEvent.h"
 #include "Flex/Events/MouseEvent.h"
 #include "Flex/Events/KeyEvent.h"
@@ -10,7 +10,7 @@ namespace Flex {
 
 	Window* Window::Create(const WindowProperites& props)
 	{
-		return new WindowsWindow(props);
+		return new MultiPlatformWindow(props);
 	}
 
 	static void GLFWErrorCallback(int error, const char* description)
@@ -18,32 +18,32 @@ namespace Flex {
 		FL_LOG_CORE_ERROR("GLFW Error ({0}): {1}", error, description);
 	}
 
-	WindowsWindow::WindowsWindow(const WindowProperites& props)
+	MultiPlatformWindow::MultiPlatformWindow(const WindowProperites& props)
 	{
 		Init(props);
 	}
 
-	WindowsWindow::~WindowsWindow()
+	MultiPlatformWindow::~MultiPlatformWindow()
 	{
 		Shutdown();
 	}
 
-	void WindowsWindow::OnUpdate()
+	void MultiPlatformWindow::OnUpdate()
 	{
 		glfwPollEvents();
 	}
 
-	void WindowsWindow::SetVSync(bool enabled)
+	void MultiPlatformWindow::SetVSync(bool enabled)
 	{
 		m_data.VSync = enabled;
 	}
 
-	bool WindowsWindow::IsVSync() const
+	bool MultiPlatformWindow::IsVSync() const
 	{
 		return m_data.VSync;
 	}
 
-	void WindowsWindow::Init(const WindowProperites& props)
+	void MultiPlatformWindow::Init(const WindowProperites& props)
 	{
 		m_data.Title = props.Title;
 		m_data.Width = props.Width;
@@ -148,7 +148,7 @@ namespace Flex {
 		});
 	}
 
-	void WindowsWindow::Shutdown()
+	void MultiPlatformWindow::Shutdown()
 	{
 		glfwDestroyWindow(m_Window);
 	}
