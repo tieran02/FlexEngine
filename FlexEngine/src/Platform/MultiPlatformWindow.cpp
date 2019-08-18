@@ -18,7 +18,7 @@ namespace Flex {
 		FL_LOG_CORE_ERROR("GLFW Error ({0}): {1}", error, description);
 	}
 
-	MultiPlatformWindow::MultiPlatformWindow(const WindowProperites& props)
+	MultiPlatformWindow::MultiPlatformWindow(const WindowProperites& props) : m_Window{nullptr}
 	{
 		Init(props);
 	}
@@ -107,6 +107,10 @@ namespace Flex {
 				data.EventCallback(event);
 				break;
 			}
+			default:
+			{
+                break;
+            }
 			}
 		});
 
@@ -128,6 +132,10 @@ namespace Flex {
 				data.EventCallback(event);
 				break;
 			}
+            default:
+            {
+                break;
+            }
 			}
 		});
 

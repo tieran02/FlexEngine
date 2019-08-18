@@ -16,6 +16,7 @@ namespace Flex {
 
 	Application::~Application()
 	{
+
 	}
 
 	void Application::Run()

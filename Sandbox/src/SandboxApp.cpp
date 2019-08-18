@@ -3,7 +3,15 @@
 class ExampleLayer : public Flex::Layer
 {
 public:
-	ExampleLayer() : Layer("Example"){}
+	ExampleLayer() : Layer("Example")
+	{
+
+	}
+
+    ~ExampleLayer() override
+    {
+
+    }
 
 	void OnUpdate() override
 	{
@@ -14,6 +22,16 @@ public:
 	{
 		FL_LOG_TRACE("{0}", event);
 	}
+
+    void OnAttach() override
+    {
+
+    }
+
+    void OnDetach() override
+    {
+
+    }
 };
 
 
@@ -24,7 +42,7 @@ public:
 	{
 		PushLayer(new ExampleLayer());
 	}
-	~Sandbox() override{}
+	~Sandbox() override = default;
 };
 
 Flex::Application* Flex::CreateApplication()

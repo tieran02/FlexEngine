@@ -40,7 +40,7 @@ namespace Flex
 	class FLEX_API WindowCloseEvent : public Event
 	{
 	public:
-		WindowCloseEvent() {}
+		WindowCloseEvent() = default;
 
 		std::string ToString() const override
 		{
@@ -63,7 +63,7 @@ namespace Flex
 	class FLEX_API AppTickEvent : public Event
 	{
 	public:
-		AppTickEvent() {}
+		AppTickEvent() = default;
 
 		std::string ToString() const override
 		{
@@ -86,7 +86,7 @@ namespace Flex
 	class FLEX_API AppUpdateEvent : public Event
 	{
 	public:
-		AppUpdateEvent() {}
+		AppUpdateEvent() = default;
 
 		std::string ToString() const override
 		{
@@ -109,7 +109,7 @@ namespace Flex
 	class FLEX_API AppRenderEvent : public Event
 	{
 	public:
-		AppRenderEvent() {}
+		AppRenderEvent() = default;
 
 		std::string ToString() const override
 		{
