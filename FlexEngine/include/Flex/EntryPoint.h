@@ -1,10 +1,10 @@
 #pragma once
-#include "IApplication.h"
+#include "Application.h"
 #include "Log.h"
 
 #ifdef FL_PLATFORM_WINDOWS
 
-extern Flex::IApplication* Flex::CreateApplication();
+extern Flex::Application* Flex::CreateApplication();
 
 int main()
 {
@@ -22,7 +22,7 @@ int main()
 
 #ifdef FL_PLATFORM_LINUX
 
-extern Flex::IApplication* Flex::CreateApplication();
+extern Flex::Application* Flex::CreateApplication();
 
 int main()
 {

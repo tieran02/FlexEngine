@@ -8,15 +8,13 @@
     #endif
 #endif
 #if FL_PLATFORM_LINUX
-    #ifdef FL_BUILD_DLL
-        #define FLEX_API __attribute__((visibility("default")))
-    #endif
+    #define FLEX_API
 #endif
 
 
 #ifdef FL_ENABLE_ASSERTS
-	#define FL_ASSERT(x, ...) { if(!(x)) { FL_LOG_ERROR("Assertion Failed: {0}", __VA_ARGS__); __debugbreak(); } }
-	#define FL_CORE_ASSERT(x, ...) { if(!(x)) { FL_LOG_CORE_ERROR("Assertion Failed: {0}", __VA_ARGS__); __debugbreak(); } }
+	#define FL_ASSERT(x, ...) { if(!(x)) { FL_LOG_ERROR("Assertion Failed: {0}", __VA_ARGS__); __builtin_trap(); } }
+	#define FL_CORE_ASSERT(x, ...) { if(!(x)) { FL_LOG_CORE_ERROR("Assertion Failed: {0}", __VA_ARGS__); __builtin_trap(); } }
 #else
 	#define FL_ASSERT(x, ...)
 	#define FL_CORE_ASSERT(x, ...)

@@ -35,7 +35,7 @@ public:
 };
 
 
-class Sandbox : public Flex::IApplication
+class Sandbox : public Flex::Application
 {
 public:
 	Sandbox()
@@ -45,7 +45,7 @@ public:
 	~Sandbox() override = default;
 };
 
-Flex::IApplication* Flex::CreateApplication()
+Flex::Application* Flex::CreateApplication()
 {
 	FL_LOG_INFO("Client initilised");
 	return new Sandbox();

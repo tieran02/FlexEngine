@@ -1,16 +1,21 @@
 #pragma once
+
 #include "flpch.h"
 #include "Core.h"
 #include "Flex/Events/IEvent.h"
 
 namespace Flex {
 
-	struct WindowProperites
+    using EventCallbackFn = std::function<void(Event&)>;
+
+    struct WindowProperites
 	{
 		std::string Title;
 		unsigned int Width;
 		unsigned int Height;
 		bool VSync;
+
+        EventCallbackFn EventCallback;
 
 		WindowProperites(const std::string& title = "Flex Engine", unsigned int width = 1280, unsigned int height = 720)
 			: Title(title), Width(width), Height(height), VSync(false){}
@@ -20,8 +25,7 @@ namespace Flex {
 	class FLEX_API IWindow
 	{
 	public:
-
-		using EventCallbackFn = std::function<void(Event&)>;
+	    IWindow(const WindowProperites& properites = WindowProperites()) : m_properties(properites){}
 		virtual ~IWindow() {}
 
 		virtual void OnUpdate() = 0;
@@ -34,8 +38,13 @@ namespace Flex {
 		virtual void SetVSync(bool enabled) = 0;
 		virtual bool IsVSync() const = 0;
 
+        //Get vulkan extensions that are needed for the window
+        virtual std::vector<const char*> VulkanExtensions() = 0;
+
 		static IWindow* Create(const WindowProperites& properites = WindowProperites());
 
+    protected:
+        WindowProperites m_properties;
 	};
 
 }

@@ -1,6 +1,6 @@
 project(Sandbox)
 
-set(CMAKE_CXX_STANDARD 14)
+set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_CXX_COMPILER "clang++")
 
 include_directories(../FlexEngine/vendor/glm/include)

@@ -3,6 +3,7 @@
 #include "Flex/Events/ApplicationEvent.h"
 #include "Flex/Events/MouseEvent.h"
 #include "Flex/Events/KeyEvent.h"
+#include <Platform/Vulkan/VulkanRenderer.h>
 
 namespace Flex {
 
@@ -18,7 +19,7 @@ namespace Flex {
 		FL_LOG_CORE_ERROR("GLFW Error ({0}): {1}", error, description);
 	}
 
-	MultiPlatformWindow::MultiPlatformWindow(const WindowProperites& props) : m_Window{nullptr}
+	MultiPlatformWindow::MultiPlatformWindow(const WindowProperites& props) : IWindow(props), m_Window{nullptr}
 	{
 		Init(props);
 	}
@@ -35,20 +36,16 @@ namespace Flex {
 
 	void MultiPlatformWindow::SetVSync(bool enabled)
 	{
-		m_data.VSync = enabled;
+		m_properties.VSync = enabled;
 	}
 
 	bool MultiPlatformWindow::IsVSync() const
 	{
-		return m_data.VSync;
+		return m_properties.VSync;
 	}
 
 	void MultiPlatformWindow::Init(const WindowProperites& props)
 	{
-		m_data.Title = props.Title;
-		m_data.Width = props.Width;
-		m_data.Height = props.Height;
-
 		FL_LOG_CORE_INFO("Creating window {0} ({1}, {2})", props.Title, props.Width, props.Height);
 
 		if (!s_GLFWInitialized)
@@ -60,15 +57,18 @@ namespace Flex {
 			s_GLFWInitialized = true;
 		}
 
-		m_Window = glfwCreateWindow((int)props.Width, (int)props.Height, m_data.Title.c_str(), nullptr, nullptr);
-		glfwMakeContextCurrent(m_Window);
-		glfwSetWindowUserPointer(m_Window, &m_data);
+        glfwWindowHint(GLFW_CLIENT_API, GLFW_NO_API);
+        glfwWindowHint(GLFW_RESIZABLE, GLFW_FALSE);
+
+
+        m_Window = glfwCreateWindow((int)props.Width, (int)props.Height, m_properties.Title.c_str(), nullptr, nullptr);
+		glfwSetWindowUserPointer(m_Window, &m_properties);
 		SetVSync(true);
 
 		// Set GLFW callbacks
 		glfwSetWindowSizeCallback(m_Window, [](GLFWwindow* window, int width, int height)
 		{
-			WindowData& data = *(WindowData*)glfwGetWindowUserPointer(window);
+			WindowProperites& data = *(WindowProperites*)glfwGetWindowUserPointer(window);
 			data.Width = width;
 			data.Height = height;
 
@@ -78,14 +78,14 @@ namespace Flex {
 
 		glfwSetWindowCloseCallback(m_Window, [](GLFWwindow* window)
 		{
-			WindowData& data = *(WindowData*)glfwGetWindowUserPointer(window);
+            WindowProperites& data = *(WindowProperites*)glfwGetWindowUserPointer(window);
 			WindowCloseEvent event;
 			data.EventCallback(event);
 		});
 
 		glfwSetKeyCallback(m_Window, [](GLFWwindow* window, int key, int scancode, int action, int mods)
 		{
-			WindowData& data = *(WindowData*)glfwGetWindowUserPointer(window);
+            WindowProperites& data = *(WindowProperites*)glfwGetWindowUserPointer(window);
 
 			switch (action)
 			{
@@ -116,7 +116,7 @@ namespace Flex {
 
 		glfwSetMouseButtonCallback(m_Window, [](GLFWwindow* window, int button, int action, int mods)
 		{
-			WindowData& data = *(WindowData*)glfwGetWindowUserPointer(window);
+            WindowProperites& data = *(WindowProperites*)glfwGetWindowUserPointer(window);
 
 			switch (action)
 			{
@@ -141,7 +141,7 @@ namespace Flex {
 
 		glfwSetScrollCallback(m_Window, [](GLFWwindow* window, double xOffset, double yOffset)
 		{
-			WindowData& data = *(WindowData*)glfwGetWindowUserPointer(window);
+            WindowProperites& data = *(WindowProperites*)glfwGetWindowUserPointer(window);
 
 			MouseScrolledEvent event((float)xOffset, (float)yOffset);
 			data.EventCallback(event);
@@ -149,7 +149,7 @@ namespace Flex {
 
 		glfwSetCursorPosCallback(m_Window, [](GLFWwindow* window, double xPos, double yPos)
 		{
-			WindowData& data = *(WindowData*)glfwGetWindowUserPointer(window);
+            WindowProperites& data = *(WindowProperites*)glfwGetWindowUserPointer(window);
 
 			MouseMovedEvent event((float)xPos, (float)yPos);
 			data.EventCallback(event);
@@ -160,4 +160,20 @@ namespace Flex {
 	{
 		glfwDestroyWindow(m_Window);
 	}
+
+    std::vector<const char*> MultiPlatformWindow::VulkanExtensions()
+    {
+        uint32_t glfwExtensionCount = 0;
+        const char** glfwExtensions;
+
+        glfwExtensions = glfwGetRequiredInstanceExtensions(&glfwExtensionCount);
+
+        std::vector<const char*> extensions;
+        extensions.reserve(glfwExtensionCount);
+        for (int i = 0; i < glfwExtensionCount; ++i)
+        {
+            extensions.emplace_back(glfwExtensions[i]);
+        }
+        return extensions;
+    }
 }

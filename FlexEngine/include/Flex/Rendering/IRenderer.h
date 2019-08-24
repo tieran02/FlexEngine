@@ -1,14 +1,20 @@
 #pragma once
 
 #include <memory>
+#include "IRenderContext.h"
 
-class IRenderContext;
-class IRenderer
+namespace Flex
 {
-public:
-    
-private:
-    std::unique_ptr<IRenderContext> m_renderContext;
-    virtual void setup() = 0;
+    class IRenderer
+    {
+    public:
+        IRenderer() = default;
+        virtual ~IRenderer() = default;
 
-};
+    protected:
+        std::unique_ptr<IRenderContext> m_renderContext;
+    private:
+        virtual void setup() = 0;
+        virtual void cleanup() = 0;
+    };
+}
