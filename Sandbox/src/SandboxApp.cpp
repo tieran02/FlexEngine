@@ -1,9 +1,9 @@
 #include "Flex.h"
 
-class ExampleLayer : public Flex::Layer
+class ExampleLayer : public Flex::ILayer
 {
 public:
-	ExampleLayer() : Layer("Example")
+	ExampleLayer() : ILayer("Example")
 	{
 
 	}
@@ -35,7 +35,7 @@ public:
 };
 
 
-class Sandbox : public Flex::Application
+class Sandbox : public Flex::IApplication
 {
 public:
 	Sandbox()
@@ -45,7 +45,7 @@ public:
 	~Sandbox() override = default;
 };
 
-Flex::Application* Flex::CreateApplication()
+Flex::IApplication* Flex::CreateApplication()
 {
 	FL_LOG_INFO("Client initilised");
 	return new Sandbox();

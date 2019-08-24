@@ -3,11 +3,11 @@
 
 namespace Flex {
 	class Event;
-	class Layer
+	class ILayer
 	{
 	public:
-		FLEX_API Layer(std::string&& name = "Layer") : m_debugName(name) {}
-		FLEX_API virtual ~Layer() = default;
+		FLEX_API ILayer(std::string&& name = "ILayer") : m_debugName(name) {}
+		FLEX_API virtual ~ILayer() = default;
 
 		FLEX_API virtual void OnAttach() = 0;
 		FLEX_API virtual void OnDetach() = 0;

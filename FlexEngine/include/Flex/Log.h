@@ -5,13 +5,13 @@
 #include "spdlog/fmt/ostr.h"
 
 namespace  Flex {
-	class Log
+	class FLEX_API Log
 	{
 	public:
-		FLEX_API static void Init();
+		static void Init();
 
-		FLEX_API inline static std::shared_ptr<spdlog::logger>& GetCoreLogger() { return s_CoreLogger; }
-		FLEX_API inline static std::shared_ptr<spdlog::logger>& GetClientLogger() { return s_ClientLogger; }
+		static std::shared_ptr<spdlog::logger>& GetCoreLogger() { return s_CoreLogger; }
+		static std::shared_ptr<spdlog::logger>& GetClientLogger() { return s_ClientLogger; }
 
 	private:
 		static std::shared_ptr<spdlog::logger> s_CoreLogger;

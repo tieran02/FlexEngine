@@ -8,7 +8,7 @@ namespace Flex {
 
 	static bool s_GLFWInitialized = false;
 
-	Window* Window::Create(const WindowProperites& props)
+	IWindow* IWindow::Create(const WindowProperites& props)
 	{
 		return new MultiPlatformWindow(props);
 	}

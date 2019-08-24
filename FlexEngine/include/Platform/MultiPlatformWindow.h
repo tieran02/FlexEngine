@@ -1,10 +1,10 @@
 #pragma once
-#include "Flex/Window.h"
+#include "Flex/IWindow.h"
 #include "GLFW/glfw3.h"
 
 namespace Flex 
 {
-	class MultiPlatformWindow : public Window
+	class MultiPlatformWindow : public IWindow
 	{
 	public:
 		MultiPlatformWindow(const WindowProperites& props);
@@ -15,7 +15,7 @@ namespace Flex
 		inline unsigned int GetWidth() const override { return m_data.Width; }
 		inline unsigned int GetHeight() const override { return m_data.Height; }
 
-		// Window attributes
+		// IWindow attributes
 		inline void SetEventCallback(const EventCallbackFn& callback) override { m_data.EventCallback = callback; }
 		void SetVSync(bool enabled) override;
 		bool IsVSync() const override;

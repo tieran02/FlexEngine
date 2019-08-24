@@ -1,6 +1,6 @@
 #pragma once
 #include "Core.h"
-#include "Layer.h"
+#include "ILayer.h"
 
 namespace Flex
 {
@@ -10,15 +10,15 @@ namespace Flex
 		FLEX_API LayerStack();
 		FLEX_API ~LayerStack();
 
-		FLEX_API void PushLayer(Layer* layer);
-		FLEX_API void PushOverlay(Layer* layer);
-		FLEX_API void PopLayer(Layer* layer);
-		FLEX_API void PopOverlay(Layer* layer);
+		FLEX_API void PushLayer(ILayer* layer);
+		FLEX_API void PushOverlay(ILayer* layer);
+		FLEX_API void PopLayer(ILayer* layer);
+		FLEX_API void PopOverlay(ILayer* layer);
 
-		FLEX_API std::vector<Layer*>::iterator begin() { return m_layers.begin(); }
-		FLEX_API std::vector<Layer*>::iterator end() { return m_layers.end(); }
+		FLEX_API std::vector<ILayer*>::iterator begin() { return m_layers.begin(); }
+		FLEX_API std::vector<ILayer*>::iterator end() { return m_layers.end(); }
 	private:
-		std::vector<Layer*> m_layers;
-		std::vector<Layer*>::iterator m_layerInsert;
+		std::vector<ILayer*> m_layers;
+		std::vector<ILayer*>::iterator m_layerInsert;
 	};
 }

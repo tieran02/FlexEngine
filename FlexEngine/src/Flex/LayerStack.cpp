@@ -10,23 +10,23 @@ namespace Flex {
 
 	LayerStack::~LayerStack()
 	{
-		for (Layer* layer : m_layers)
+		for (ILayer* layer : m_layers)
 		{
 			delete layer;
 		}
 	}
 
-	void LayerStack::PushLayer(Layer* layer)
+	void LayerStack::PushLayer(ILayer* layer)
 	{
 		m_layerInsert = m_layers.emplace(m_layerInsert, layer);
 	}
 
-	void LayerStack::PushOverlay(Layer* layer)
+	void LayerStack::PushOverlay(ILayer* layer)
 	{
 		m_layers.emplace_back(layer);
 	}
 
-	void LayerStack::PopLayer(Layer* layer)
+	void LayerStack::PopLayer(ILayer* layer)
 	{
 		auto it = std::find(m_layers.begin(), m_layers.end(), layer);
 		if(it != m_layers.end())
@@ -36,7 +36,7 @@ namespace Flex {
 		}
 	}
 
-	void LayerStack::PopOverlay(Layer* layer)
+	void LayerStack::PopOverlay(ILayer* layer)
 	{
 		auto it = std::find(m_layers.begin(), m_layers.end(), layer);
 		if (it != m_layers.end())

@@ -1,6 +1,6 @@
 #pragma once
 
-#ifdef FL_PLATFROM_WINDOWS
+#ifdef FL_PLATFORM_WINDOWS
 	#ifdef FL_BUILD_DLL
 		#define FLEX_API __declspec(dllexport)
 	#else

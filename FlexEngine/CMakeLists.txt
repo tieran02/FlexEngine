@@ -1,5 +1,8 @@
 project(FlexEngine)
 
+#DEFINES
+add_compile_definitions(FL_BUILD_DLL)
+
 set(CMAKE_CXX_STANDARD 14)
 set(CMAKE_CXX_COMPILER "clang++")
 
@@ -24,6 +27,6 @@ file(GLOB_RECURSE flexFiles
         "include/*.h"
         "src/*.cpp"
         )
-
+		
 add_library(FlexEngine SHARED ${glad} ${flexFiles})
 target_link_libraries(FlexEngine glfw)
