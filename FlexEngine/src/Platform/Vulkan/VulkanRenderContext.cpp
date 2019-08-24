@@ -57,5 +57,7 @@ namespace Flex
         createInfo.enabledLayerCount = 0;
 
         m_vkInstance = vk::createInstance(createInfo);
+        FL_CORE_ASSERT(m_vkInstance, "Failed to create vulkan instance");
+
     }
 }
