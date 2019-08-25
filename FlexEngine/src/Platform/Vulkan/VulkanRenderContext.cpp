@@ -1,9 +1,8 @@
 //
 // Created by tieran on 24/08/2019.
 //
-#include <flpch.h>
+#include "pchheader.h"
 #include "Platform/Vulkan/VulkanRenderContext.h"
-#include <memory>
 #include <Flex/Application.h>
 
 namespace Flex
@@ -58,6 +57,11 @@ namespace Flex
 
         m_vkInstance = vk::createInstance(createInfo);
         FL_CORE_ASSERT(m_vkInstance, "Failed to create vulkan instance");
+
+    }
+
+    void VulkanRenderContext::enableValidationLayers()
+    {
 
     }
 }

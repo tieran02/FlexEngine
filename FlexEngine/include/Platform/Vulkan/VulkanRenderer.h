@@ -1,5 +1,4 @@
 #pragma once
-
 #include <Flex/Rendering/IRenderer.h>
 
 namespace Flex
@@ -9,7 +8,7 @@ namespace Flex
     public:
         static std::unique_ptr<VulkanRenderer> Create();
         VulkanRenderer();
-        ~VulkanRenderer() override ;
+        ~VulkanRenderer();
 
     private:
 

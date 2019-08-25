@@ -10,5 +10,7 @@ endif()
 
 add_compile_definitions(FL_ENABLE_ASSERTS)
 
+include(${CMAKE_CURRENT_SOURCE_DIR}/cmake/cotire.cmake)
+
 add_subdirectory(FlexEngine)
 add_subdirectory(Sandbox)

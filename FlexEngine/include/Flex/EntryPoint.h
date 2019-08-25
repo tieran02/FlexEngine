@@ -1,6 +1,5 @@
 #pragma once
 #include "Application.h"
-#include "Log.h"
 
 #ifdef FL_PLATFORM_WINDOWS
 

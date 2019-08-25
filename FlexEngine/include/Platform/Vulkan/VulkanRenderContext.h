@@ -1,8 +1,5 @@
 #pragma once
-
-
 #include <Flex/Rendering/IRenderContext.h>
-#include <memory>
 #include <vulkan/vulkan.hpp>
 
 namespace Flex
@@ -20,5 +17,6 @@ namespace Flex
         void cleanup() override;
 
         void createInstance();
+        void enableValidationLayers();
     };
 }

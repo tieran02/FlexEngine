@@ -1,5 +1,4 @@
-#include "flpch.h"
-#include "Flex/Log.h"
+#include "pchheader.h"
 
 namespace  Flex {
 	std::shared_ptr<spdlog::logger> Log::s_CoreLogger = nullptr;

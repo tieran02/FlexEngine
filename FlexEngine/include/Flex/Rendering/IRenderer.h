@@ -1,10 +1,10 @@
 #pragma once
 
-#include <memory>
 #include "IRenderContext.h"
 
 namespace Flex
 {
+    class IRenderContext;
     class IRenderer
     {
     public:

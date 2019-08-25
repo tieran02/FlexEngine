@@ -4,7 +4,6 @@ project(FlexEngine)
 add_compile_definitions(FL_BUILD_DLL)
 
 set(CMAKE_CXX_STANDARD 17)
-set(CMAKE_CXX_COMPILER "clang++")
 
 #GLFW
 set(GLFW_BUILD_DOCS OFF CACHE BOOL "" FORCE)
@@ -28,5 +27,8 @@ file(GLOB_RECURSE flexFiles
         )
 		
 add_library(FlexEngine SHARED ${flexFiles})
+set_target_properties(FlexEngine PROPERTIES COTIRE_CXX_PREFIX_HEADER_INIT "include/pchheader.h")
+cotire(FlexEngine)
+
 target_include_directories(FlexEngine PRIVATE Vulkan::Vulkan)
 target_link_libraries(FlexEngine glfw Vulkan::Vulkan)

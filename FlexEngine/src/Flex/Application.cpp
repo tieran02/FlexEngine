@@ -1,10 +1,8 @@
-#include "flpch.h"
+#include "pchheader.h"
 #include "Flex/Application.h"
-#include <memory>
 #include <Platform/Vulkan/VulkanRenderer.h>
 #include "Flex/IWindow.h"
 #include "Flex/Events/ApplicationEvent.h"
-#include "Flex/Log.h"
 
 namespace Flex {
 
