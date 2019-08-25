@@ -12,11 +12,22 @@ namespace Flex
 
     private:
         vk::Instance m_vkInstance;
+        VkDebugUtilsMessengerEXT debugMessenger;
 
         void create() override;
         void cleanup() override;
 
         void createInstance();
-        void enableValidationLayers();
+        bool checkValidationLayerSupport();
+        void setupDebugMessenger();
+
+        void populateDebugMessengerCreateInfo(VkDebugUtilsMessengerCreateInfoEXT &createInfo);
+        VkResult createDebugUtilsMessengerEXT(VkInstance instance, const VkDebugUtilsMessengerCreateInfoEXT *pCreateInfo,
+                                     const VkAllocationCallbacks *pAllocator,
+                                     VkDebugUtilsMessengerEXT *pDebugMessenger);
+
+        void destroyDebugUtilsMessengerEXT(VkInstance instance, VkDebugUtilsMessengerEXT debugMessenger,
+                                           const VkAllocationCallbacks *pAllocator);
+
     };
 }

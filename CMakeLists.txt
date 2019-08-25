@@ -8,7 +8,7 @@ else()
     add_compile_definitions(FL_PLATFORM_WINDOWS)
 endif()
 
-add_compile_definitions(FL_ENABLE_ASSERTS)
+add_compile_options("$<$<CONFIG:DEBUG>:-DDEBUG>")
 
 include(${CMAKE_CURRENT_SOURCE_DIR}/cmake/cotire.cmake)
 
