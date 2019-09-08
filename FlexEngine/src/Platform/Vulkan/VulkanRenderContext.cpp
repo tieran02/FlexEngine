@@ -51,6 +51,7 @@ namespace Flex
         FL_LOG_CORE_INFO("Creating Vulkan Render Context");
         createInstance();
         setupDebugMessenger();
+        pickPhysicalDevice();
         FL_LOG_CORE_INFO("Created Vulkan Render Context");
 
     }
@@ -168,10 +169,64 @@ namespace Flex
         }
     }
 
-    void VulkanRenderContext::destroyDebugUtilsMessengerEXT(VkInstance instance, VkDebugUtilsMessengerEXT debugMessenger, const VkAllocationCallbacks* pAllocator) {
+    void VulkanRenderContext::destroyDebugUtilsMessengerEXT(VkInstance instance, VkDebugUtilsMessengerEXT debugMessenger, const VkAllocationCallbacks* pAllocator)
+    {
         auto func = (PFN_vkDestroyDebugUtilsMessengerEXT) vkGetInstanceProcAddr(instance, "vkDestroyDebugUtilsMessengerEXT");
         if (func != nullptr) {
             func(instance, debugMessenger, pAllocator);
         }
     }
+
+    void VulkanRenderContext::pickPhysicalDevice()
+    {
+        auto devices = m_vkInstance.enumeratePhysicalDevices();
+        for (const auto& device : devices)
+        {
+            if (isDeviceSuitable(device)) {
+                m_physicalDevice = device;
+                FL_LOG_CORE_INFO(std::string("Vulkan selected device: ") + device.getProperties().deviceName);
+                break;
+            }
+        }
+    }
+
+    bool VulkanRenderContext::isDeviceSuitable(vk::PhysicalDevice device)
+    {
+        QueueFamilyIndices indices = findQueueFamilies(device);
+
+        vk::PhysicalDeviceProperties deviceProperties = device.getProperties();
+        vk::PhysicalDeviceFeatures deviceFeatures = device.getFeatures();
+
+        //TODO: Rate devices and pick the best one, now just select the first DiscreteGpu
+        return indices.isComplete() && deviceProperties.deviceType == vk::PhysicalDeviceType::eDiscreteGpu &&
+               deviceFeatures.geometryShader;
+    }
+
+    QueueFamilyIndices VulkanRenderContext::findQueueFamilies(vk::PhysicalDevice device)
+    {
+        QueueFamilyIndices indices;
+        // Assign index to queue families that could be found
+        std::vector<vk::QueueFamilyProperties> queueFamilies = device.getQueueFamilyProperties();
+
+        int i = 0;
+        for (const auto& queueFamily : queueFamilies)
+        {
+            //get graphics queue family
+            if (queueFamily.queueCount > 0 && queueFamily.queueFlags & vk::QueueFlagBits::eGraphics) {
+                indices.graphicsFamily = i;
+            }
+
+            i++;
+        }
+
+        FL_CORE_ASSERT(indices.graphicsFamily.has_value(), "Vulkan couldn't find a device with a graphics queue family");
+
+        return indices;
+    }
+
+    void VulkanRenderContext::createLogicalDevice()
+    {
+
+    }
+
 }

@@ -8,7 +8,7 @@ namespace Flex
     public:
         static std::unique_ptr<VulkanRenderer> Create();
         VulkanRenderer();
-        ~VulkanRenderer();
+        ~VulkanRenderer() override;
 
     private:
 

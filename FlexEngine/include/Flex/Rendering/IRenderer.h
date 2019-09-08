@@ -4,7 +4,6 @@
 
 namespace Flex
 {
-    class IRenderContext;
     class IRenderer
     {
     public:

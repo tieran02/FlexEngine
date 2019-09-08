@@ -61,7 +61,7 @@ namespace Flex {
         glfwWindowHint(GLFW_RESIZABLE, GLFW_FALSE);
 
 
-        m_Window = glfwCreateWindow((int)props.Width, (int)props.Height, m_properties.Title.c_str(), nullptr, nullptr);
+        m_Window = glfwCreateWindow((int)props.Width, (int)props.Height, m_properties.Title, nullptr, nullptr);
 		glfwSetWindowUserPointer(m_Window, &m_properties);
 		SetVSync(true);
 

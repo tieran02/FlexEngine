@@ -1,3 +1,6 @@
+
+#include <Flex/Log.h>
+
 #include "pchheader.h"
 
 namespace  Flex {
@@ -12,4 +15,13 @@ namespace  Flex {
 		s_ClientLogger = spdlog::stdout_color_mt("APP");
 		s_ClientLogger->set_level(spdlog::level::trace);
 	}
+
+    spdlog::logger &Log::GetCoreLogger()
+    {
+        return *s_CoreLogger;
+    }
+
+    spdlog::logger &Log::GetClientLogger() {
+        return *s_ClientLogger;
+    }
 }

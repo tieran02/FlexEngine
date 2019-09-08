@@ -8,16 +8,16 @@ namespace Flex {
 
     using EventCallbackFn = std::function<void(Event&)>;
 
-    struct WindowProperites
+    struct FLEX_API WindowProperites
 	{
-		std::string Title;
+		const char* Title;
 		unsigned int Width;
 		unsigned int Height;
 		bool VSync;
 
         EventCallbackFn EventCallback;
 
-		WindowProperites(const std::string& title = "Flex Engine", unsigned int width = 1280, unsigned int height = 720)
+		WindowProperites(const char* title = "Flex Engine", unsigned int width = 1280, unsigned int height = 720)
 			: Title(title), Width(width), Height(height), VSync(false){}
 
 	};
